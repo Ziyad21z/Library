@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+}
+
+.container {
+    font-family: cursive;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 2px solid teal;
+    list-style: none;
+}
+
+.navigation-login{
+    border-radius: 4px;
+    border: transparent;
+    background-color:teal;
+    padding: 8px;
+    color: white;
+    cursor:pointer;
+}
+.navigation-header {
+    margin: 0;
+    color: teal;
+}
+ul{
+    margin: 0;
+}
