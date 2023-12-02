@@ -1,13 +1,11 @@
-
+let booksCount = 0;
+const count = document.querySelector('.booksCount')
 const Book = function (title, auther, pages, readingStatus) {
     this.title = title
     this.auther = auther
     this.pages = pages
     this.readingStatus = readingStatus
-    let booksCount = 0;
-    this.getBookCount = function () {
-        return booksCount++;
-    }
+    booksCount += 1;
 }
 function addBooks(title, auther, pages, readingStatus) {
     return new Book(title, auther, pages, readingStatus)
@@ -21,6 +19,7 @@ const s6 = addBooks('som6', 'sami', 2224, false)
 const s7 = addBooks('som7', 'sami', 2224, true)
 
 let myBooks = [s1, s2, s3, s4, s5, s6, s7];
+count.textContent = 'Books: ' + myBooks.length
 myBooks.forEach((element, index) => {
     const cards = document.querySelector('.cards')
 
@@ -59,6 +58,8 @@ myBooks.forEach((element, index) => {
     remove.addEventListener('click', () => {
         myBooks.splice(index, 1)
         card.remove()
+        booksCount--;
+        count.textContent = 'Books: ' + booksCount
     })
 
     card.appendChild(title)

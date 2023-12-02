@@ -1,9 +1,9 @@
-body {
-    margin: 0;
+* {
+    font-family: cursive;
 }
 
-.container {
-    font-family: cursive;
+body {
+    margin: 0;
 }
 
 .navigation {
@@ -21,6 +21,10 @@ body {
     padding: 8px;
     color: white;
     cursor: pointer;
+}
+
+.booksCount {
+    color: teal;
 }
 
 .navigation-header {
@@ -63,14 +67,17 @@ button {
     width: 100%;
     padding: 8px 0;
 }
-.reading-status-true{
+
+.reading-status-true {
     background-color: teal;
     color: white;
 }
+
 .reading-status-false {
     background-color: gray;
     color: white;
 }
+
 .remove-button {
     background-color: gray;
     color: white;
