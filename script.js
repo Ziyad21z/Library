@@ -15,13 +15,13 @@ function addBooks(title, auther, pages, readingStatus) {
 const s1 = addBooks('som1', 'sami', 2221, false)
 const s2 = addBooks('som2', 'sami', 2222, true)
 const s3 = addBooks('som3', 'sami', 2223, false)
-const s4 = addBooks('som3', 'sami', 2224, true)
-const s5 = addBooks('som3', 'sami', 2224, true)
-const s6 = addBooks('som3', 'sami', 2224, false)
-const s7 = addBooks('som3', 'sami', 2224, true)
+const s4 = addBooks('som4', 'sami', 2224, true)
+const s5 = addBooks('som5', 'sami', 2224, true)
+const s6 = addBooks('som6', 'sami', 2224, false)
+const s7 = addBooks('som7', 'sami', 2224, true)
 
 let myBooks = [s1, s2, s3, s4, s5, s6, s7];
-myBooks.forEach((element) => {
+myBooks.forEach((element, index) => {
     const cards = document.querySelector('.cards')
 
     const card = document.createElement('div')
@@ -44,12 +44,12 @@ myBooks.forEach((element) => {
     readingStatusButton.addEventListener('click', () => {
         if (element.readingStatus) {
             element.readingStatus = false
-            readingStatusButton.className ='reading-status-false'
-            readingStatusButton.innerText ='not finished'
+            readingStatusButton.className = 'reading-status-false'
+            readingStatusButton.innerText = 'not finished'
         } else {
             element.readingStatus = true
-            readingStatusButton.className ='reading-status-true'
-            readingStatusButton.innerText ='finished'
+            readingStatusButton.className = 'reading-status-true'
+            readingStatusButton.innerText = 'finished'
         }
     })
 
@@ -57,7 +57,8 @@ myBooks.forEach((element) => {
     remove.className = 'remove-button'
     remove.innerText = ' remove'
     remove.addEventListener('click', () => {
-        // will do later :)
+        myBooks.splice(index, 1)
+        card.remove()
     })
 
     card.appendChild(title)
