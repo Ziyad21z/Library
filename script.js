@@ -1,16 +1,19 @@
 const cards = document.querySelector('.cards')
+
 const Book = function (title, auther, pages, readingStatus) {
     this.title = title
     this.auther = auther
     this.pages = pages
     this.readingStatus = readingStatus
 }
+
 function addBooks(title, auther, pages, readingStatus) {
     return new Book(title, auther, pages, readingStatus)
 }
 
 let myBooks = [];
 displayBooks()
+
 function displayBooks() {
     myBooks.forEach((element, index) => {
 
@@ -49,8 +52,6 @@ function displayBooks() {
         remove.addEventListener('click', () => {
             myBooks.splice(index, 1)
             card.remove()
-
-            console.table(myBooks)
         })
 
         card.appendChild(title)
@@ -78,19 +79,14 @@ addBook.addEventListener("click", () => {
 });
 
 submitButton.addEventListener('click', (e) => {
-    e.preventDefault()
-    const newBook = addBooks(dialogTitle.value, dialogAuther.value, dialogPages.value, dialogCheck.checked)
+    const newBook = addBooks(dialogTitle.value, dialogAuther.value,
+        dialogPages.value, dialogCheck.checked)
     myBooks.push(newBook);
-
-    console.table(myBooks)
-
     cards.innerHTML = ''
     displayBooks()
-    dialog.close()
 })
 
 closeButton.addEventListener("click", (e) => {
-    e.preventDefault()
     clearDialog()
     dialog.close();
 });
