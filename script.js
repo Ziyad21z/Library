@@ -1,71 +1,103 @@
-let booksCount = 0;
-const count = document.querySelector('.booksCount')
+const cards = document.querySelector('.cards')
 const Book = function (title, auther, pages, readingStatus) {
     this.title = title
     this.auther = auther
     this.pages = pages
     this.readingStatus = readingStatus
-    booksCount += 1;
 }
 function addBooks(title, auther, pages, readingStatus) {
     return new Book(title, auther, pages, readingStatus)
 }
-const s1 = addBooks('som1', 'sami', 2221, false)
-const s2 = addBooks('som2', 'sami', 2222, true)
-const s3 = addBooks('som3', 'sami', 2223, false)
-const s4 = addBooks('som4', 'sami', 2224, true)
-const s5 = addBooks('som5', 'sami', 2224, true)
-const s6 = addBooks('som6', 'sami', 2224, false)
-const s7 = addBooks('som7', 'sami', 2224, true)
 
-let myBooks = [s1, s2, s3, s4, s5, s6, s7];
-count.textContent = 'Books: ' + myBooks.length
-myBooks.forEach((element, index) => {
-    const cards = document.querySelector('.cards')
+let myBooks = [];
+displayBooks()
+function displayBooks() {
+    myBooks.forEach((element, index) => {
 
-    const card = document.createElement('div')
-    card.className = 'card'
+        const card = document.createElement('div')
+        card.className = 'card'
 
-    const title = document.createElement('div')
-    title.className = 'card-book-title'
-    title.innerText = element.title
+        const title = document.createElement('div')
+        title.className = 'card-book-title'
+        title.innerText = element.title
 
-    const auther = document.createElement('div')
-    auther.innerText = element.auther
+        const auther = document.createElement('div')
+        auther.innerText = element.auther
 
-    const pages = document.createElement('div')
-    pages.className = 'pages'
-    pages.innerText = element.pages + ' pages'
+        const pages = document.createElement('div')
+        pages.className = 'pages'
+        pages.innerText = element.pages + ' pages'
 
-    const readingStatusButton = document.createElement('button')
-    readingStatusButton.className = element.readingStatus === true ? 'reading-status-true' : 'reading-status-false'
-    readingStatusButton.innerText = element.readingStatus === true ? 'finished' : 'not finished'
-    readingStatusButton.addEventListener('click', () => {
-        if (element.readingStatus) {
-            element.readingStatus = false
-            readingStatusButton.className = 'reading-status-false'
-            readingStatusButton.innerText = 'not finished'
-        } else {
-            element.readingStatus = true
-            readingStatusButton.className = 'reading-status-true'
-            readingStatusButton.innerText = 'finished'
-        }
+        const readingStatusButton = document.createElement('button')
+        readingStatusButton.className = element.readingStatus === true ? 'reading-status-true' : 'reading-status-false'
+        readingStatusButton.innerText = element.readingStatus === true ? 'finished' : 'not finished'
+        readingStatusButton.addEventListener('click', () => {
+            if (element.readingStatus) {
+                element.readingStatus = false
+                readingStatusButton.className = 'reading-status-false'
+                readingStatusButton.innerText = 'not finished'
+            } else {
+                element.readingStatus = true
+                readingStatusButton.className = 'reading-status-true'
+                readingStatusButton.innerText = 'finished'
+            }
+        })
+
+        const remove = document.createElement('button')
+        remove.className = 'remove-button'
+        remove.innerText = ' remove'
+        remove.addEventListener('click', () => {
+            myBooks.splice(index, 1)
+            card.remove()
+
+            console.table(myBooks)
+        })
+
+        card.appendChild(title)
+        card.appendChild(auther)
+        card.appendChild(pages)
+        card.appendChild(readingStatusButton)
+        card.appendChild(remove)
+        cards.appendChild(card)
     })
+}
 
-    const remove = document.createElement('button')
-    remove.className = 'remove-button'
-    remove.innerText = ' remove'
-    remove.addEventListener('click', () => {
-        myBooks.splice(index, 1)
-        card.remove()
-        booksCount--;
-        count.textContent = 'Books: ' + booksCount
-    })
+const dialog = document.querySelector("dialog");
+const addBook = document.querySelector('.navigation-Add')
+const submitButton = document.querySelector(".submit-button");
+const closeButton = document.querySelector(".cancel-button");
 
-    card.appendChild(title)
-    card.appendChild(auther)
-    card.appendChild(pages)
-    card.appendChild(readingStatusButton)
-    card.appendChild(remove)
-    cards.appendChild(card)
+const dialogTitle = document.querySelector('.add-title')
+const dialogAuther = document.querySelector('.add-auther')
+const dialogPages = document.querySelector('.add-pages')
+const dialogCheck = document.querySelector('#reading-check')
+
+addBook.addEventListener("click", () => {
+    clearDialog()
+    dialog.showModal();
+});
+
+submitButton.addEventListener('click', (e) => {
+    e.preventDefault()
+    const newBook = addBooks(dialogTitle.value, dialogAuther.value, dialogPages.value, dialogCheck.checked)
+    myBooks.push(newBook);
+
+    console.table(myBooks)
+
+    cards.innerHTML = ''
+    displayBooks()
+    dialog.close()
 })
+
+closeButton.addEventListener("click", (e) => {
+    e.preventDefault()
+    clearDialog()
+    dialog.close();
+});
+
+function clearDialog() {
+    dialogTitle.value = ''
+    dialogAuther.value = ''
+    dialogPages.value = ''
+    dialogCheck.checked = false
+}

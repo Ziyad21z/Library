@@ -14,8 +14,24 @@
         <li class="navigation-header">
             <h2>Library</h2>
         </li>
-        <li class="navigation-Add">Add</li>
-        <li class="booksCount"></li>
+
+        <dialog>
+            <form id="addBookForm">
+                <div class="dialog-container">
+                    <input type="text" class="add-title" autofocus placeholder="Title">
+                    <input type="text" class="add-auther" placeholder="Auther">
+                    <input type="number" class="add-pages" placeholder="Pages">
+                    <div class="checkbox-display">
+                        <label for="reading-check">did you finish it?</label>
+                        <input type="checkbox" id="reading-check" placeholder="Title">
+                    </div>
+                    <button class="submit-button">submit</button>
+                    <button class="cancel-button">cancel</button>
+                </div>
+            </form>
+        </dialog>
+
+        <li><button class="navigation-Add">Add</button></li>
     </ul>
     <div class="cards"></div>
 </body>
